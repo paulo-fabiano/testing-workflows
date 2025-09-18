@@ -1,21 +1,40 @@
+# Pipeline Name
 name: CI-CD
 
+# Trigger
 on:
+  # O evento que dispara a pipeline é o "push"
   push:
+    # Lista de branches que serão monitoradas para disparar este workflow. 
     branches: [ "main" ]
+  # A instrução "workflow_dispatch" nos permite executar a pipeline manualmente
   workflow_dispatch:
 
+# As "jobs" são as tarefas que serão executadas em ordem
 jobs:
 
   CI:
+    # Aqui informamos o nome da job (tarefa)
+    name: CI
+    # Aqui especificamos qual será a runner, que é o ambiente que a job será executada
+    # Windows, Mac, Ubuntu. Posso usar como runners meus servidores
     runs-on: ubuntu-latest
+    # Os "steps" são os passos que serão executados pela job
+    # Podemos usar comandos Shell Script ou actions
     steps:
-        - run: echo "Obter o código"
-        - run: echo "Executar o Docker Build"
-        - run: echo "Enviar a Imagem Docker para o Docker Hub"
-  CD:
-    runs-on: ubuntu-latest
-    steps:
-        - run: echo "Obter o código"
-        - run: echo "Configurar o Kubeconfig"
-        - run: echo "Executar o apply"
+      # Shell
+      - name: "Executando Shell Script"
+        run: echo "Obter o código"
+      # Action
+      - name: "Action Name"
+        run: echo "Using Action XYZ"
+
+      # Podemos ainda passar uma série de comados
+      # Para isso usamos o "|" e depois inserimos os comando abaixo
+      - name: ""
+        run: |
+          echo "Executando uma sequência de comandos"
+          sleep 2
+          echo "1º Comando"
+          sleep 2
+          echo "2º Comando"
