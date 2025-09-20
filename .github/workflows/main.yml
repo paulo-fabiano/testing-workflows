@@ -15,7 +15,7 @@ jobs:
 
   CI:
     # Aqui informamos o nome da job (tarefa)
-    name: CI
+    name: Integração Contínua
     # Aqui especificamos qual será a runner, que é o ambiente que a job será executada
     # Windows, Mac, Ubuntu. Posso usar como runners meus servidores
     runs-on: ubuntu-latest
@@ -31,10 +31,22 @@ jobs:
 
       # Podemos ainda passar uma série de comados
       # Para isso usamos o "|" e depois inserimos os comando abaixo
-      - name: ""
+      - name: "Executando comandos em sequência"
+        # Posso especificar um Shell especifico
+        shell: sh
         run: |
           echo "Executando uma sequência de comandos"
           sleep 2
           echo "1º Comando"
           sleep 2
           echo "2º Comando"
+
+      # Posso usar um Python como Shell e executar scripts Python
+      - name: "Script Python"
+        shell: python
+        run: |
+          variavel = "Hello World"
+          print(variavel)
+
+      # Link da documentação sobre shell
+      # https://docs.github.com/pt/actions/reference/workflows-and-actions/workflow-syntax#defaultsrunshell
